@@ -1,11 +1,7 @@
-// SPDX-License-Identifier: MIT
-
-pragma solidity 0.8.9;
-
-import"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol";
+pragma solidity ^0.5.12;
  
 contract Crowdsale {
-    using SafeMath for uint256;
+   using SafeMath for uint256;
  
    address public owner; // the owner of the contract
    address public escrow; // wallet to collect raised ETH
@@ -13,14 +9,14 @@ contract Crowdsale {
    mapping (address => uint256) public balances; // Balances in incoming Ether
  
    // Initialization
-   constructor(address _escrow) {
+   function Crowdsale(address _escrow) public{
        owner = tx.origin;
        // add address of the specific contract
        escrow = _escrow;
    }
   
    // function to receive ETH
-   function receiveEth() public {
+   function() public {
        balances[msg.sender] = balances[msg.sender].add(msg.value);
        savedBalance = savedBalance.add(msg.value);
        escrow.send(msg.value);
